@@ -281,7 +281,7 @@ rbf.ard.k <- function(sigma, l) {
   )
 }
 
-# Example of fitting the 1d function: log(abs(cos(X))) ^ 2 + cos(X) ^ 2 + sin(log(X))
+# Example of fitting a complex 1 dimensional function
 gp.example.1d <- function() {
   missing <- c(seq(.1, 5, .1), seq(8.5, 10, .1))
   full <- seq(.1, 10, .1)
@@ -289,8 +289,8 @@ gp.example.1d <- function() {
   sparse <- seq(.1, 20, 3)
   # 1-d example
   X <- matrix(full)
-  # y <- matrix(sin(X) + log(abs(cos(X) - cos(X) * log(abs(cosh(X))))))
-  y <- matrix(log(cos(X)^4) ^ 2 + cos(X) ^ 3 + runif(nrow(X), -.1, .1))
+  y <- matrix(log(abs(cos(X))) ^ 2 + cos(X) ^ 2 + sin(log(X)) + sin(X) + log(abs(cos(X) - cos(X) * log(abs(cosh(X))))))
+  # y <- matrix(log(cos(X)^4) ^ 2 + cos(X) ^ 3 + runif(nrow(X), -.1, .1))
   
   gp <- gp.fit(X, y, sigma_n = 0.2, k = rbf.k(sigma=.05))
   gp <- gp.optimize(gp,
